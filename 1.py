@@ -1,4 +1,4 @@
-8
+
 def fix_expenses(expenses):
     while expenses:
         x = expenses.pop()
