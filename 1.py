@@ -1,6 +1,5 @@
-
-
-def fix_expences(expenses):
+8
+def fix_expenses(expenses):
     while expenses:
         x = expenses.pop()
         c = 2020 - x
