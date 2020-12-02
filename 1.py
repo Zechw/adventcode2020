@@ -24,6 +24,7 @@ def find_n_complements(expenses, target=2020, n=3):
         return [target]
     elif n == 1:
         return None
+        
     while expenses:
         x = expenses.pop()
         c = target - x
