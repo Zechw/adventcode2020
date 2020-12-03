@@ -8,7 +8,6 @@ def count_trees(map, rise=1, run=3):
         i = (i+run) % 31
     return count
 
-
 def mult_slopes(map_string):
     map = map_string.split("\n")
     return (
@@ -18,6 +17,15 @@ def mult_slopes(map_string):
         count_trees(map, 1, 7),
         count_trees(map, 2, 1)
     )
+
+def variable_mult_slopes(map_string, rise_run_pairs):
+    map = map_string.split("\n")
+    results = []
+    for rise, run in rise_run_pairs:
+        results.append(count_trees(map, rise, run))
+    return results
+
+
 
 def one_pass(map, rise_run_pairs):
     counts = [0] * len(rise_run_pairs)
@@ -31,3 +39,8 @@ def one_pass(map, rise_run_pairs):
 def ops(map_string):
     map = map_string.split("\n")
     return one_pass(map, [(1, 1),(1, 3),(1, 5),(1, 7),(2, 1)])
+
+
+def variable_ops(map_string, rise_run_pairs):
+    map = map_string.split("\n")
+    return one_pass(map, rise_run_pairs)
