@@ -1,15 +1,49 @@
 
+def noenum_one_pass(map, rise_run_pairs):
+    pair_count = len(rise_run_pairs)
+    counts = [0] * pair_count
+    for i in range(len(map)):
+        row = map[i]
+        for j in range(pair_count):
+            rise, run = rise_run_pairs[j]
+            if i % rise == 0:
+                if row[(i // rise * run) % 31] == "#":
+                    counts[j] += 1
+    return counts
+
+
+def dirty_one_pass(map, rise_run_pairs):
+    counts = [0] * len(rise_run_pairs)
+    for i, row in enumerate(map):
+        for j, (rise, run) in enumerate(rise_run_pairs):
+            if i % rise == 0:
+                if row[(i + rise) % 31] == "#":
+                    counts[j] += 1
+    return counts
+
+
+
 rr_pairs = []
 for i in range(1,100):
     for j in range(1,100):
         rr_pairs.append((i,j))
 
+
+timeit.timeit(lambda: count_trees(m, 1, 3), number=1000)
+timeit.timeit(lambda: one_pass(m, [(1, 3)]), number=1000)
+timeit.timeit(lambda: noenum_one_pass(m, [(1, 3)]), number=1000)
+timeit.timeit(lambda: dirty_one_pass(m, [(1, 3)]), number=1000)
+
+
+
+
+
 timeit.timeit(lambda: variable_mult_slopes(large_x, rr_pairs), number=10)
 timeit.timeit(lambda: variable_ops(large_x, rr_pairs), number=10)
 
 
-timeit.timeit(lambda: mult_slopes(large_x), number=1000)
-timeit.timeit(lambda: ops(large_x), number=1000)
+timeit.timeit(lambda: mult_slopes(large_x), number=100)
+timeit.timeit(lambda: ops(large_x), number=100)
 
 
 timeit.timeit(lambda: int(2 * 1 / 2), number=1000000)
@@ -26,6 +60,10 @@ timeit.timeit(lambda: (56465465 // 2 * 3) % 31, number=1000000)
 timeit.timeit(lambda: count_trees(m, 1, 3), number=1000)
 timeit.timeit(lambda: bad_one_pass(m, 1, 3), number=1000)
 
+
+
+timeit.timeit(lambda: [x for x in range(1000)], number=10000)
+timeit.timeit(lambda: [x for i,x in enumerate(range(1000))], number=10000)
 
 
 
