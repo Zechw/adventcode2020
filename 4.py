@@ -9,8 +9,6 @@ def validate_batch(batch_file):
             valid_count += 1
     return valid_count
 
-
-
 def parse_passport(passport_string):
     raw_fields = passport_string.replace("\n", " ").split(" ")
     passport = {}
@@ -18,7 +16,6 @@ def parse_passport(passport_string):
         key, val = field.split(":", maxsplit=1)
         passport[key] = val
     return passport
-
 
 def validate_passport(passport):
     for key, validator in key_validators.items():
@@ -28,8 +25,6 @@ def validate_passport(passport):
         except:
             return False
     return True
-
-
 
 key_validators = {
     'byr': lambda x: 1920 <= int(x) <= 2002,
