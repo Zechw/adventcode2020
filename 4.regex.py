@@ -37,7 +37,7 @@ match anything but a split
 
 
 look-around split
-(?<=^|\\n\\n)(.*?)(?=\\n\\n|$)
+(?:^|\\n\\n)(.*?)(?=\\n\\n|$)
 
 
 ()
@@ -45,14 +45,15 @@ look-around split
 
 
 try 1
-(((:?(?:\w|\s|#|:|\\n(?!\\n))*?)(byr:|iyr:|eyr:|hgt:|hcl:|ecl:|pid:)(:?(?:\w|\s|#|:|\\n(?!\\n))*?)){7}(\\n\\n|$))
+(((.*)(byr:|iyr:|eyr:|hgt:|hcl:|ecl:|pid:)(.*)){7}(\\n\\n|$))
 problem: the .* matches \n\n..
+(((:?(?:\w|\s|#|:|\\n(?!\\n))*?)(byr:|iyr:|eyr:|hgt:|hcl:|ecl:|pid:)(:?(?:\w|\s|#|:|\\n(?!\\n))*?)){7}(\\n\\n|$))
+
 
 
 try2
-(?:^|\\n\\n)((.*)(byr:|iyr:|eyr:|hgt:|hcl:|ecl:|pid:)(.*)){7}(?=\\n\\n|$)
-
-
+(?:^|\\n\\n)((byr:|iyr:|eyr:|hgt:|hcl:|ecl:|pid:)(:?(?:\w|\s|#|:|\\n(?!\\n))*?)){7}(?=\\n\\n|$)
+(?:^|\\n\\n)((:?(?:\w|\s|#|:|\\n(?!\\n))*?)(byr:|iyr:|eyr:|hgt:|hcl:|ecl:|pid:)(:?(?:\w|\s|#|:|\\n(?!\\n))*?)){7}(?=\\n\\n|$)
 
 
 
