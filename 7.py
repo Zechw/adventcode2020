@@ -51,7 +51,7 @@ def recursively_check_contains(target_bag, contained_in_map, found, checked):
 def recursively_count_bags(target_bag, rule_map, known_counts):
     if target_bag not in rule_map:
         return 0
-    total_count = 0 # counting itself
+    total_count = 0
     for num, bag in rule_map[target_bag]:
         if bag not in known_counts:
             known_counts[bag] = recursively_count_bags(bag, rule_map, known_counts)
