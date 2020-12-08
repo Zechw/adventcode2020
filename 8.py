@@ -28,19 +28,16 @@ def fix_loop(input_text):
     i, a, ran_i = 0, 0, set()
     edited = False
     while i < len(instructions):
-        ins = instructions[i]
         has_been_ran = i in ran_i
         ran_i.add(i)
         if has_been_ran:
             # we looped! rewind and retry without edit
-            # print('loop', i, a, ran_i)
-            # input()
             i, a, ran_i = branch_point
+            ins = instructions[i]
             edited = False
         else:
+            ins = instructions[i]
             if not edited and ins.op is not ops['acc']:
-                # print('branch', i, a, ran_i)
-                # input()
                 # save our spot, but try to fix this spot and continue
                 branch_point = (i, a, ran_i.copy())
                 ins = swap(ins)
