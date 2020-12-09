@@ -34,6 +34,5 @@ def find_consecutive_sums(input_text, target):
             x = nums.pop(0)
             current_sum += x
             sum_window.append(x)
-
-        if current_sum == target:
+        elif current_sum == target:
             return min(sum_window) + max(sum_window)
