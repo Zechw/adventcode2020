@@ -1,0 +1,37 @@
+from copy import deepcopy
+
+NEIGHBOR_MAP = [
+    (-1, -1),
+    (-1, 0),
+    (-1, 1),
+    (0, -1),
+    (0, 1),
+    (1, -1),
+    (1, 0),
+    (1, 1),
+]
+
+
+def find_stable(inp):
+    ferry = list(map(list, inp.split("\n")))
+    size = (len(ferry), len(ferry[0]))
+    while True:
+        next_ferry = deepcopy(ferry)
+        for i in range(size[0]):
+            for j in range(size[1]):
+                seat = ferry[i][j]
+                n_occ = 0
+                for ii, jj in NEIGHBOR_MAP:
+                    ii += i
+                    jj += j
+                    if ii < 0 or jj < 0 or ii == size[0] or jj == size[1]:
+                        continue
+                    if ferry[ii][jj] == "#":
+                        n_occ += 1
+                if seat == "L" and n_occ == 0:
+                    next_ferry[i][j] = "#"
+                elif seat == "#" and n_occ > 3:
+                    next_ferry[i][j] = "L"
+        if ferry == next_ferry:
+            return sum(map(lambda x: x.count("#"), ferry))
+        ferry = next_ferry

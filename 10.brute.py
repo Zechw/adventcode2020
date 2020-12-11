@@ -16,3 +16,21 @@ def bf_loop(current_joltage, target_joltage, adps):
             + bf_loop(current_joltage + 2, target_joltage, adps)
             + bf_loop(current_joltage + 3, target_joltage, adps)
         )
+
+
+
+
+
+def brute_map(input_string):
+    adps = set(parse_nums(input_string))
+    m = [0] * (max(adps) + 4)
+    for a in adps:
+        m[a] = 1
+    return map_loop(0, max(adps), m)
+
+def map_loop(c, t, m):
+    pass
+    # if c > t:
+    #     return 0
+    # else:
+    #     return sum(m[c+1:c+4])
