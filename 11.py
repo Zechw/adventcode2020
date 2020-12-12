@@ -22,6 +22,8 @@ def find_stable(inp):
             for j in range(size[1]):
                 seat = ferry[i][j]
                 n_occ = 0
+                if seat == ".":
+                    continue
                 for direction in NEIGHBOR_MAP:
                     n = get_first_seat(direction, i, j, ferry, size)
                     if n == "#":
