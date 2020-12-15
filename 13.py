@@ -35,3 +35,25 @@ def verify_guess(guess, buses):
         if guess % bus != 0:
             return False
     return True
+
+
+def win_2(inp, guess_start=1e14):
+    bus_map = [(i, int(x)) for i,x in enumerate(inp.split("\n")[1].split(",")) if x is not "x"]
+    first_bus = bus_map.pop(0)[1]
+    guess = (guess_start // first_bus) * first_bus # start us around the range of gs
+    while True:
+        if fast_verify(guess, bus_map):
+            return guess
+        guess += first_bus
+
+def fast_verify(guess, bus_map):
+    # bus_map: [(i,bus),]
+    for i, bus in bus_map:
+        if (guess + i) % bus != 0:
+            return False
+    return True
+
+
+def win_3(inp, guess_start):
+    # use max(bus) as the guess increment? does this even work, or do we need to
+    # use max(matched) as increment? 
